@@ -7,10 +7,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TermcounterbackendApplicationTests {
+public class TermCounterBackendApplicationTests {
 
 	@Test
 	public void contextLoads() {
+	}
+
+	@Test
+	public void applicationContextTest(){
+		TermCounterBackendApplication.main(new String[]{});
 	}
 
 }

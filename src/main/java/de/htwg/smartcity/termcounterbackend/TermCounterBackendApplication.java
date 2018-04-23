@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TermcounterbackendApplication {
+public class TermCounterBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TermcounterbackendApplication.class, args);
+		SpringApplication.run(TermCounterBackendApplication.class, args);
 	}
 }
