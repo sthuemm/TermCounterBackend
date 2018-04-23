@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class FederalStateTest {
 
     @Test
-    public void createNewFederalStateNoArgsConstructor(){
+    public void createNewFederalState(){
 
         FederalState federalState = new FederalState();
         federalState.setName("Musterbundesland");
@@ -20,14 +20,5 @@ public class FederalStateTest {
 
     }
 
-    @Test
-    public void createNewFederalStateAllArgsConstructor(){
-
-        FederalState federalState = new FederalState(1L, "Musterbundesland");
-
-        Assert.assertEquals("Id must be 1L", 1L, federalState.getId());
-        Assert.assertEquals("Name must be Musterbundesland", "Musterbundesland", federalState.getName());
-
-    }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class DistrictTest {
 
     @Test
-    public void createNewDistrictNoArgsConstructor(){
+    public void createNewDistrict(){
 
         District district = new District();
         district.setId(1L);
@@ -19,16 +19,5 @@ public class DistrictTest {
         Assert.assertEquals("Name must be Musterlandkreis", "Musterlandkreis", district.getName());
 
     }
-
-    @Test
-    public void createNewDistrictAllArgsConstructor(){
-
-        District district = new District(1L, "Musterlandkreis");
-
-        Assert.assertEquals("Id must be 1L", 1L, district.getId());
-        Assert.assertEquals("Name must be Musterlandkreis", "Musterlandkreis", district.getName());
-
-    }
-
 
 }

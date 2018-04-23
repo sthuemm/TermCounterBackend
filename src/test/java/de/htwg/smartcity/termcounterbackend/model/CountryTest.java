@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CountryTest {
 
     @Test
-    public void createNewCountryNoArgsConstructor(){
+    public void createNewCountry(){
 
         Country country = new Country();
         country.setId(1L);
@@ -19,16 +19,4 @@ public class CountryTest {
         Assert.assertEquals("Name must be Germany", "Germany", country.getName());
 
     }
-
-    @Test
-    public void createNewCountryAllArgsConstructor(){
-
-        Country country = new Country(1L, "Germany");
-
-        Assert.assertEquals("Id must be 1L", 1L, country.getId());
-        Assert.assertEquals("Name must be Germany", "Germany", country.getName());
-
-    }
-
-
 }

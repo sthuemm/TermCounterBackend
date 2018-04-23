@@ -13,7 +13,7 @@ public class GraduationTest {
 
 
     @Test
-    public void createNewGraduationNoArgsConstructor(){
+    public void createNewGraduation(){
         Graduation graduation = new Graduation();
         graduation.setId(1L);
         graduation.setName("Realschule");
@@ -21,15 +21,4 @@ public class GraduationTest {
         Assert.assertEquals("Id must be 1L", 1L, graduation.getId());
         Assert.assertEquals("Name must be Realschule", "Realschule", graduation.getName());
     }
-
-    @Test
-    public void createNewGraduationAllArgsConstructor(){
-        Graduation graduation = new Graduation(1L, "Realschule");
-
-        Assert.assertEquals("Id must be 1L", 1L, graduation.getId());
-        Assert.assertEquals("Name must be Realschule", "Realschule", graduation.getName());
-    }
-
-
-
 }

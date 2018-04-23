@@ -9,20 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class WorldTest {
 
     @Test
-    public void createNewWorldNoArgsConstructor(){
+    public void createNewWorld(){
         World world = new World();
         world.setName("Erde");
         world.setId(1L);
         Assert.assertEquals("Name must be Erde", "Erde", world.getName());
         Assert.assertEquals("Id musst be 1L", 1L, world.getId());
     }
-
-    @Test
-    public void createNewWorldAllConstructor(){
-        World world = new World(1L, "Erde");
-        Assert.assertEquals("Name must be Erde", "Erde", world.getName());
-        Assert.assertEquals("Id musst be 1L", 1L, world.getId());
-    }
-
 
 }

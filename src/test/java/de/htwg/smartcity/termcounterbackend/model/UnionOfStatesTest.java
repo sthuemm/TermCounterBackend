@@ -10,17 +10,10 @@ public class UnionOfStatesTest {
 
 
     @Test
-    public void createUnionOfStatesObjectNoArgsConstructor(){
+    public void createNewUnionOfStates(){
         UnionOfStates unionOfStates = new UnionOfStates();
         unionOfStates.setId(1L);
         unionOfStates.setName("European Union");
-        Assert.assertEquals("Id must be 1L", 1L, unionOfStates.getId());
-        Assert.assertEquals("Name must be European Union", "European Union", unionOfStates.getName());
-    }
-
-    @Test
-    public void createUnionOfStatesObjectAllArgsConstructor(){
-        UnionOfStates unionOfStates = new UnionOfStates(1L, "European Union");
         Assert.assertEquals("Id must be 1L", 1L, unionOfStates.getId());
         Assert.assertEquals("Name must be European Union", "European Union", unionOfStates.getName());
     }
