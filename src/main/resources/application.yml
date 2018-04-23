@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: termcounter_backend
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:mem:termcounter;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+
+---
+spring:
+  profiles: Test
+  jpa:
+    database: H2
+    hibernate:
+        ddl-auto: create-drop
+  datasource:
+    url: jdbc:h2:mem:termcountertest;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
