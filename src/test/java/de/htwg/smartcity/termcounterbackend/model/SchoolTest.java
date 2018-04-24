@@ -5,16 +5,24 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
+
 @RunWith(SpringRunner.class)
 public class SchoolTest {
 
     @Test
     public void createNewSchoolObject(){
+        Person person = new Person();
+        person.setId(1L);
+        person.setFirstName("Max");
+        person.setLastName("Mustermann");
+        person.setDayOfBirth(LocalDate.of(2000, 1,1));
 
         School school = new School();
         school.setId(1L);
         school.setName("Max Mustermann Schule");
         school.setAddress(createTestAdress());
+        school.getPersons().add(person);
 
         Assert.assertEquals("Id must be 1L", 1L, school.getId());
         Assert.assertEquals("Name must be Max Mustermann Schule", "Max Mustermann Schule", school.getName());
@@ -22,6 +30,7 @@ public class SchoolTest {
         Assert.assertEquals("City must be Musterstadt", "Musterstadt", school.getAddress().getCity());
         Assert.assertEquals("Postal must be 12345", 12345, school.getAddress().getPostal());
         Assert.assertEquals("Address id must be 1L", 1L, school.getAddress().getId());
+        Assert.assertEquals("First name of person must be Max", "Max", school.getPersons().get(0).getFirstName());
     }
 
     private Address createTestAdress(){
