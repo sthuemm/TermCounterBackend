@@ -1,13 +1,13 @@
 package de.htwg.smartcity.termcounterbackend.dao;
 
-import de.htwg.smartcity.termcounterbackend.model.Person;
+import de.htwg.smartcity.termcounterbackend.model.PendingWord;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.concurrent.Future;
 
 @Repository
-public interface PersonRepository extends CrudRepository<Person, Long> {
+public interface PendingWordRepository extends CrudRepository<PendingWord, String> {
 
 }

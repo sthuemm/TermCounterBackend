@@ -1,8 +1,12 @@
 spring:
   application:
     name: termcounter_backend
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
   jpa:
-    database: MYSQL
+    database: H2
     hibernate:
       ddl-auto: update
   datasource:
@@ -15,7 +19,7 @@ spring:
   jpa:
     database: H2
     hibernate:
-        ddl-auto: create-drop
+        ddl-auto: update
   datasource:
     url: jdbc:h2:mem:termcountertest;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
