@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,15 +19,24 @@ public class Person extends HasAddress {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String firstName;
+    private String firstname;
 
-    private String lastName;
+    private String lastname;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dayOfBirth;
 
-    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(name = "person_term", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "term_id"))
     private List<Term> terms;
 
+    public Person(){
+        this.terms = new ArrayList<>();
+    }
+
+    public Person(String firstname, String lastname) {
+        this.terms = new ArrayList<>();
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 }

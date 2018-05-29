@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -70,9 +71,7 @@ public class WordServiceImpl implements WordService {
             });
             personRepository.save(person.get());
         } else {
-            Person person1 = new Person();
-            person1.setId(1L);
-            personRepository.save(person1);
+            log.error("No database entry for id "+personId+" found");
         }
 
     }
@@ -98,7 +97,7 @@ public class WordServiceImpl implements WordService {
                 personRepository.save(person);
                 newTerm.getPersons().add(person);
                 termRepository.save(newTerm);
-                log.info("Assigned '"+person.getFirstName()+" "+person.getLastName()+"' to '"+word+"'");
+                log.info("Assigned '"+person.getTerms()+" "+person.getLastname()+"' to '"+word+"'");
             }
         }
 
@@ -125,5 +124,102 @@ public class WordServiceImpl implements WordService {
 
     public void initializeTestData(){
         log.info("Initializing Test Data");
+        initTerms();
+        initPersons();
+        assignTermsToPersons();
+
+    }
+
+    private void initPersons(){
+        personRepository.save(new Person("Hans", "Kohlhorst"));
+        personRepository.save(new Person("Mario", "Gruenkamp"));
+        personRepository.save(new Person("Niklas", "Kohlfeld"));
+
+        personRepository.findAll().forEach(person -> log.info("Added '"+person.getFirstname()+" "+person.getLastname()+"' into table 'Person'"));
+    }
+
+    private void initTerms(){
+        termRepository.save(new Term("Begriff"));
+        termRepository.save(new Term("Haus"));
+        termRepository.save(new Term("Bank"));
+        termRepository.save(new Term("Auto"));
+        termRepository.save(new Term("Smartphone"));
+        termRepository.save(new Term("Schulabschluss"));
+        termRepository.save(new Term("Familie"));
+        termRepository.save(new Term("Arbeitsplatz"));
+        termRepository.save(new Term("Präsentation"));
+        termRepository.save(new Term("Software"));
+
+        termRepository.findAll().forEach(term -> log.info("Added '"+term.getWord()+"' into table 'Term'"));
+    }
+
+    private Person findByFirstAndLastNameAndAddTermToPerson(Term term, String firstname, String lastname){
+        Person person = personRepository.findByFirstnameAndLastname(firstname, lastname);
+        person.getTerms().add(term);
+        return person;
+    }
+
+    private void assignTermsToPersons(){
+        Optional<Term> optionalTerm = termRepository.findByWord("Begriff");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Haus");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Bank");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Auto");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Smartphone");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Schulabschluss");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Familie");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Arbeitsplatz");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Präsentation");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+        optionalTerm = termRepository.findByWord("Software");
+        if(optionalTerm.isPresent()){
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+        }
+
     }
 }

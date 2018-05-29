@@ -29,9 +29,9 @@ public class WordController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping("/{sentence}")
-    public ResponseEntity addGetWords(@PathVariable String sentence){
-        wordService.checkSentencesForNewTerms(sentence, 1L);
+    @GetMapping("/person/{personId}/{sentence}")
+    public ResponseEntity addGetWords(@PathVariable String sentence, @PathVariable Long personId){
+        wordService.checkSentencesForNewTerms(sentence, personId);
         System.out.println(sentence);
         return new ResponseEntity(HttpStatus.OK);
     }
