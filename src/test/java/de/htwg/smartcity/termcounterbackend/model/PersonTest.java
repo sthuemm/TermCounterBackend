@@ -15,13 +15,13 @@ public class PersonTest {
     public void createNewPerson(){
         Person person = new Person();
         person.setId(1L);
-        person.setFirstName("Max");
-        person.setLastName("Mustermann");
+        person.setFirstname("Max");
+        person.setLastname("Mustermann");
         person.setDayOfBirth(LocalDate.of(2000, 1,1));
 
         Assert.assertEquals("Id must be 1L", 1L, person.getId());
-        Assert.assertEquals("First name must be Max", "Max", person.getFirstName());
-        Assert.assertEquals("Last name must be Mustermann", "Mustermann", person.getLastName());
+        Assert.assertEquals("First name must be Max", "Max", person.getFirstname());
+        Assert.assertEquals("Last name must be Mustermann", "Mustermann", person.getLastname());
         Assert.assertEquals("Day of Birth must be 2000/1/1", "2000-01-01", person.getDayOfBirth().toString());
     }
 
