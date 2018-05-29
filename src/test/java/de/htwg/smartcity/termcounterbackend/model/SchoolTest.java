@@ -14,8 +14,8 @@ public class SchoolTest {
     public void createNewSchoolObject(){
         Person person = new Person();
         person.setId(1L);
-        person.setFirstName("Max");
-        person.setLastName("Mustermann");
+        person.setFirstname("Max");
+        person.setLastname("Mustermann");
         person.setDayOfBirth(LocalDate.of(2000, 1,1));
 
         School school = new School();
@@ -30,7 +30,7 @@ public class SchoolTest {
         Assert.assertEquals("City must be Musterstadt", "Musterstadt", school.getAddress().getCity());
         Assert.assertEquals("Postal must be 12345", 12345, school.getAddress().getPostal());
         Assert.assertEquals("Address id must be 1L", 1L, school.getAddress().getId());
-        Assert.assertEquals("First name of person must be Max", "Max", school.getPersons().get(0).getFirstName());
+        Assert.assertEquals("First name of person must be Max", "Max", school.getPersons().get(0).getFirstname());
     }
 
     private Address createTestAdress(){
