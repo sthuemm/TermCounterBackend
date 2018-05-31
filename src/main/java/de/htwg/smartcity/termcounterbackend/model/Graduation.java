@@ -19,15 +19,16 @@ public class Graduation {
     private String name;
 
 
+
     @OneToMany
-    private List<School> schools;
+    private List<Person> persons;
 
     public Graduation(){
-        this.schools = new ArrayList<>();
+        this.persons = new ArrayList<>();
     }
 
     public Graduation(String name){
-        this.schools = new ArrayList<>();
+        this.persons = new ArrayList<>();
         this.name = name;
     }
 }

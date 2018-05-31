@@ -1,8 +1,10 @@
 package de.htwg.smartcity.termcounterbackend.controller;
 
 import de.htwg.smartcity.termcounterbackend.dao.PersonRepository;
+import de.htwg.smartcity.termcounterbackend.dao.UnionOfStatesRepository;
 import de.htwg.smartcity.termcounterbackend.model.PendingWord;
 import de.htwg.smartcity.termcounterbackend.model.Person;
+import de.htwg.smartcity.termcounterbackend.model.UnionOfStates;
 import de.htwg.smartcity.termcounterbackend.service.WordService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class WordController {
     private WordService wordService;
 
     @Resource
-    private PersonRepository personRepository;
+    private UnionOfStatesRepository unionOfStatesRepository;
 
     @PostMapping("/")
     public ResponseEntity addWords(@RequestBody String sentence){
@@ -44,14 +46,11 @@ public class WordController {
         return "pendingWords";
     }
 
-    @GetMapping("/person/{personId}")
-    public String getPerson(Model model, @PathVariable Long personId){
-        Optional<Person> personOptional = personRepository.findById(personId);
-        if(personOptional.isPresent()){
-            Person person = personOptional.get();
-            model.addAttribute("numberTerms", person.getTerms().size());
-        }
+    @GetMapping("")
+    public String getPerson(Model model){
+        Iterable<UnionOfStates> unionOfStates = unionOfStatesRepository.findAll();
 
+        model.addAttribute("unionOfStates", unionOfStates);
 
         return "index";
     }
@@ -61,6 +60,12 @@ public class WordController {
         System.out.println("word as term: " +word);
         wordService.declarePendingWordToTerm(word);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity getEverythingAsJson(){
+
+        return new ResponseEntity(unionOfStatesRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/nonTerm")

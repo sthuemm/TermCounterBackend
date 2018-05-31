@@ -22,8 +22,15 @@ public class Country {
     @OneToMany
     private List<FederalState> federalStates;
 
+
+
     public Country(){
         this.federalStates = new ArrayList<>();
+    }
+
+    public Country(String name){
+        this.federalStates = new ArrayList<>();
+        this.name = name;
     }
 
 }

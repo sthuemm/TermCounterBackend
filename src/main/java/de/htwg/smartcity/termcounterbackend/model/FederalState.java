@@ -25,4 +25,9 @@ public class FederalState {
         this.districts = new ArrayList<>();
     }
 
+    public FederalState(String name){
+        this.districts = new ArrayList<>();
+        this.name = name;
+    }
+
 }

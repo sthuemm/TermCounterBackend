@@ -20,14 +20,16 @@ public class School extends HasAddress {
     private String name;
 
     @OneToMany
-    private List<Person> persons;
+    private List<Graduation> graduations;
+
+
 
     public School(){
-        this.persons = new ArrayList<>();
+        this.graduations = new ArrayList<>();
     }
 
     public School(String name){
-        this.persons = new ArrayList<>();
+        this.graduations = new ArrayList<>();
         this.name = name;
     }
 

@@ -25,4 +25,9 @@ public class UnionOfStates {
         this.countries = new ArrayList<>();
     }
 
+    public UnionOfStates(String name){
+        this.countries = new ArrayList<>();
+        this.name = name;
+    }
+
 }

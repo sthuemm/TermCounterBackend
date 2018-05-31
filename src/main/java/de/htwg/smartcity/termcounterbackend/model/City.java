@@ -22,10 +22,15 @@ public class City {
     private int postal;
 
     @OneToMany
-    private List<Graduation> graduations;
+    private List<School> schools;
 
     public City(){
-        this.graduations = new ArrayList<>();
+        this.schools = new ArrayList<>();
+    }
+
+    public City(String name){
+        this.schools = new ArrayList<>();
+        this.name = name;
     }
 
 

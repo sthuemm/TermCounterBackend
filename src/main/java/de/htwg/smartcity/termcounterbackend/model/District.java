@@ -26,4 +26,9 @@ public class District {
         this.cities = new ArrayList<>();
     }
 
+    public District(String name){
+        this.cities = new ArrayList<>();
+        this.name = name;
+    }
+
 }
