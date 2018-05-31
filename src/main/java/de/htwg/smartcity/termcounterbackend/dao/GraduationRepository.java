@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GraduationRepository extends CrudRepository<Graduation, Long> {
+
+    Graduation findByName(String name);
+
 }

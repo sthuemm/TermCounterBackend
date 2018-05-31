@@ -1,13 +1,7 @@
 package de.htwg.smartcity.termcounterbackend.service.impl;
 
-import de.htwg.smartcity.termcounterbackend.dao.NonTermRepository;
-import de.htwg.smartcity.termcounterbackend.dao.PendingWordRepository;
-import de.htwg.smartcity.termcounterbackend.dao.PersonRepository;
-import de.htwg.smartcity.termcounterbackend.dao.TermRepository;
-import de.htwg.smartcity.termcounterbackend.model.NonTerm;
-import de.htwg.smartcity.termcounterbackend.model.PendingWord;
-import de.htwg.smartcity.termcounterbackend.model.Person;
-import de.htwg.smartcity.termcounterbackend.model.Term;
+import de.htwg.smartcity.termcounterbackend.dao.*;
+import de.htwg.smartcity.termcounterbackend.model.*;
 import de.htwg.smartcity.termcounterbackend.service.WordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,6 +29,30 @@ public class WordServiceImpl implements WordService {
 
     @Resource
     private PersonRepository personRepository;
+
+    @Resource
+    private SchoolRepository schoolRepository;
+
+    @Resource
+    private GraduationRepository graduationRepository;
+
+    @Resource
+    private CityRepository cityRepository;
+
+    @Resource
+    private DistrictRepository districtRepository;
+
+    @Resource
+    private FederalStateRepository federalStateRepository;
+
+    @Resource
+    private CountyRepository countyRepository;
+
+    @Resource
+    private UnionOfStatesRepository unionOfStatesRepository;
+
+    @Resource
+    private WorldRepository worldRepository;
 
     @Override
     public void checkSentencesForNewTerms(String sentence, Long personId) {
@@ -97,7 +115,7 @@ public class WordServiceImpl implements WordService {
                 personRepository.save(person);
                 newTerm.getPersons().add(person);
                 termRepository.save(newTerm);
-                log.info("Assigned '"+person.getTerms()+" "+person.getLastname()+"' to '"+word+"'");
+                log.info("Assigned '"+person.getFirstname()+" "+person.getLastname()+"' to '"+word+"'");
             }
         }
 
@@ -127,14 +145,68 @@ public class WordServiceImpl implements WordService {
         initTerms();
         initPersons();
         assignTermsToPersons();
+        initSchools();
+        initGraduations();
 
+    }
+
+    private void initCities(){
+
+    }
+
+    private void initGraduations(){
+        Graduation graduation = new Graduation("Hauptschule");
+        graduation.getSchools().add(findSchool("Geschwister Scholl Schule"));
+        graduationRepository.save(graduation);
+        graduation = new Graduation("Realschule");
+        graduation.getSchools().add(findSchool("Wessenbergschule"));
+        graduationRepository.save(graduation);
+        graduation = new Graduation("Gymnasium");
+        graduation.getSchools().add(findSchool("Humboldgymnasium"));
+        graduation.getSchools().add(findSchool("Mettnau Schule"));
+        graduation.getSchools().add(findSchool("Merz Schule"));
+        graduationRepository.save(graduation);
+
+        graduationRepository.findAll().forEach(graduation1 -> log.info("Added '"+graduation1.getName()+"' into Table 'Graduation'"));
+    }
+
+    private School findSchool(String name){
+        School school = schoolRepository.findByName(name);
+        if(school == null){
+            log.error("School '"+name+"' could not be found" );
+        }
+        return school;
+    }
+
+    private void initSchools(){
+        School newSchool = new School("Geschwister Scholl Schule");
+        newSchool.getPersons().add(personRepository.findByFirstnameAndLastname("Hans", "Kohlhorst"));
+        schoolRepository.save(newSchool);
+        newSchool = new School("Mettnau Schule");
+        newSchool.getPersons().add(personRepository.findByFirstnameAndLastname("Mario", "Gruenkamp"));
+        schoolRepository.save(newSchool);
+        newSchool = new School("Merz Schule");
+        newSchool.getPersons().add(personRepository.findByFirstnameAndLastname("Niklas", "Kohlfeld"));
+        schoolRepository.save(newSchool);
+        newSchool = new School("Wessenbergschule");
+        newSchool.getPersons().add(personRepository.findByFirstnameAndLastname("Jennifer", "Schröder"));
+        schoolRepository.save(newSchool);
+        newSchool = new School("Humboldgymnasium");
+        newSchool.getPersons().add(personRepository.findByFirstnameAndLastname("Mike", "Zimmermann"));
+        schoolRepository.save(newSchool);
+
+        //print new schools
+        schoolRepository.findAll().forEach(school -> log.info("Added '"+school.getName()+"' into table 'School'"));
     }
 
     private void initPersons(){
         personRepository.save(new Person("Hans", "Kohlhorst"));
         personRepository.save(new Person("Mario", "Gruenkamp"));
         personRepository.save(new Person("Niklas", "Kohlfeld"));
+        personRepository.save(new Person("Jennifer", "Schröder"));
+        personRepository.save(new Person("Mike", "Zimmermann"));
 
+        //print new persons
         personRepository.findAll().forEach(person -> log.info("Added '"+person.getFirstname()+" "+person.getLastname()+"' into table 'Person'"));
     }
 
@@ -150,6 +222,7 @@ public class WordServiceImpl implements WordService {
         termRepository.save(new Term("Präsentation"));
         termRepository.save(new Term("Software"));
 
+        //print new terms
         termRepository.findAll().forEach(term -> log.info("Added '"+term.getWord()+"' into table 'Term'"));
     }
 
@@ -165,6 +238,8 @@ public class WordServiceImpl implements WordService {
             personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Hans", "Kohlhorst"));
             personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mario", "Gruenkamp"));
             personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Niklas", "Kohlfeld"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Jennifer", "Schröder"));
+            personRepository.save(findByFirstAndLastNameAndAddTermToPerson(optionalTerm.get(),"Mike", "Zimmermann"));
         }
         optionalTerm = termRepository.findByWord("Haus");
         if(optionalTerm.isPresent()){

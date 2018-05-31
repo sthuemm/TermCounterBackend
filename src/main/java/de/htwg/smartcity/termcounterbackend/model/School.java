@@ -26,4 +26,9 @@ public class School extends HasAddress {
         this.persons = new ArrayList<>();
     }
 
+    public School(String name){
+        this.persons = new ArrayList<>();
+        this.name = name;
+    }
+
 }

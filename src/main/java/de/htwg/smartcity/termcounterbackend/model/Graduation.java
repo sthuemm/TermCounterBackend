@@ -18,10 +18,16 @@ public class Graduation {
 
     private String name;
 
+
     @OneToMany
     private List<School> schools;
 
     public Graduation(){
         this.schools = new ArrayList<>();
+    }
+
+    public Graduation(String name){
+        this.schools = new ArrayList<>();
+        this.name = name;
     }
 }
