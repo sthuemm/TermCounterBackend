@@ -21,6 +21,12 @@ public class FederalState {
     @OneToMany
     private List<District> districts;
 
+    public double getAverageTermCount(){
+        double terms = districts.stream().mapToDouble(District::getAverageTermCount).sum();
+        int numberPersons = districts.size();
+        return terms / numberPersons;
+    }
+
     public FederalState(){
         this.districts = new ArrayList<>();
     }

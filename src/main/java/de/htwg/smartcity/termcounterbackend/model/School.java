@@ -22,7 +22,11 @@ public class School extends HasAddress {
     @OneToMany
     private List<Graduation> graduations;
 
-
+    public double getAverageTermCount(){
+        double terms = graduations.stream().mapToDouble(Graduation::getAverageTermCount).sum();
+        int numberPersons = graduations.size();
+        return terms / numberPersons;
+    }
 
     public School(){
         this.graduations = new ArrayList<>();

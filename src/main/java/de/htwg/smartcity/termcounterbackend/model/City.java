@@ -24,6 +24,12 @@ public class City {
     @OneToMany
     private List<School> schools;
 
+    public double getAverageTermCount(){
+        double terms = schools.stream().mapToDouble(School::getAverageTermCount).sum();
+        int numberPersons = schools.size();
+        return terms / numberPersons;
+    }
+
     public City(){
         this.schools = new ArrayList<>();
     }

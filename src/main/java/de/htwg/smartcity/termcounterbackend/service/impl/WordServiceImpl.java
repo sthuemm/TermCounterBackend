@@ -151,6 +151,7 @@ public class WordServiceImpl implements WordService {
         initCountries();
         initUnionOfStates();
 
+
     }
 
     private void initUnionOfStates(){
@@ -373,6 +374,7 @@ public class WordServiceImpl implements WordService {
         newSchool = new School("Toronto Public School");
         newSchool.getGraduations().add(findGraduation("Gymnasium_TorontoPublicSchool"));
         schoolRepository.save(newSchool);
+
 
         //print new schools
         schoolRepository.findAll().forEach(school -> log.info("Added '"+school.getName()+"' into table 'School'"));

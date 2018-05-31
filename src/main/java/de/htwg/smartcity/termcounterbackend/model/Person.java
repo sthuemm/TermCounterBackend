@@ -34,12 +34,17 @@ public class Person extends HasAddress {
 
     public Person(){
         this.terms = new ArrayList<>();
-
+        this.numberTerms = terms.size();
     }
 
     public Person(String firstname, String lastname) {
         this.terms = new ArrayList<>();
         this.firstname = firstname;
         this.lastname = lastname;
+        this.numberTerms = terms.size();
+    }
+
+    public int getNumberTerms(){
+        return terms.size();
     }
 }

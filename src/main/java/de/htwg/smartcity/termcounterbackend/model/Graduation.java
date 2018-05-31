@@ -18,10 +18,16 @@ public class Graduation {
 
     private String name;
 
-
-
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Person> persons;
+
+    public double getAverageTermCount(){
+        double terms = persons.stream().mapToDouble(Person::getNumberTerms).sum();
+        int numberPersons = persons.size();
+        return terms / numberPersons;
+    }
+
+
 
     public Graduation(){
         this.persons = new ArrayList<>();

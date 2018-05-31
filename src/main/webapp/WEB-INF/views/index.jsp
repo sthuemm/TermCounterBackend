@@ -15,7 +15,7 @@
     <c:forEach items="${unionOfStates}" var="unionOfState">
         <p>
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#unionOfState${unionOfState.id}" aria-expanded="false" aria-controls="${unionOfState.id}">
-                    ${unionOfState.name}
+                    ${unionOfState.name} (${unionOfState.getAverageTermCount()})
             </button>
         </p>
         <div class="collapse" id="unionOfState${unionOfState.id}">
@@ -23,7 +23,7 @@
                 <c:forEach items="${unionOfState.countries}" var="country">
                     <p>
                         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#country${country.id}" aria-expanded="false" aria-controls="${country.id}">
-                                ${country.name}
+                                ${country.name} (${country.getAverageTermCount()})
                         </button>
                     </p>
                     <div class="collapse" id="country${country.id}">
@@ -31,7 +31,7 @@
                             <c:forEach items="${country.federalStates}" var="federalState">
                                 <p>
                                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#federalState${federalState.id}" aria-expanded="false" aria-controls="${federalState.id}">
-                                            ${federalState.name}
+                                            ${federalState.name} (${federalState.getAverageTermCount()})
                                     </button>
                                 </p>
                                 <div class="collapse" id="federalState${federalState.id}">
@@ -39,7 +39,7 @@
                                         <c:forEach items="${federalState.districts}" var="district">
                                             <p>
                                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#district${district.id}" aria-expanded="false" aria-controls="${district.id}">
-                                                        ${district.name}
+                                                        ${district.name} (${district.getAverageTermCount()})
                                                 </button>
                                             </p>
                                             <div class="collapse" id="district${district.id}">
@@ -47,7 +47,7 @@
                                                     <c:forEach items="${district.cities}" var="city">
                                                         <p>
                                                             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#city${city.id}" aria-expanded="false" aria-controls="${city.id}">
-                                                                    ${city.name}
+                                                                    ${city.name} (${city.getAverageTermCount()})
                                                             </button>
                                                         </p>
                                                         <div class="collapse" id="city${city.id}">
@@ -55,7 +55,7 @@
                                                                 <c:forEach items="${city.schools}" var="school">
                                                                     <p>
                                                                         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#school${school.id}" aria-expanded="false" aria-controls="${school.id}">
-                                                                                ${school.name}
+                                                                                ${school.name} (${school.getAverageTermCount()})
                                                                         </button>
                                                                     </p>
                                                                     <div class="collapse" id="school${school.id}">
@@ -63,14 +63,14 @@
                                                                             <c:forEach items="${school.graduations}" var="graduation">
                                                                                 <p>
                                                                                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#graduation${graduation.id}" aria-expanded="false" aria-controls="${graduation.id}">
-                                                                                            ${graduation.name}
+                                                                                            ${graduation.name} (${graduation.getAverageTermCount()})
                                                                                     </button>
                                                                                 </p>
                                                                                 <div class="collapse" id="graduation${graduation.id}">
                                                                                     <div class="card card-body">
                                                                                         <c:forEach items="${graduation.persons}" var="person">
                                                                                             <p>
-                                                                                                    ${person.firstname} ${person.lastname}: ${person.terms.size()}
+                                                                                                    ${person.firstname} ${person.lastname}: ${person.getNumberTerms()}
                                                                                             </p>
                                                                                             <%--<div class="collapse" id="person${person.id}">--%>
                                                                                                 <%--<div class="card card-body">--%>
