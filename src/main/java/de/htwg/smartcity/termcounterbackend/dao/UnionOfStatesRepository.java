@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UnionOfStatesRepository extends CrudRepository<UnionOfStates, Long> {
+
+    UnionOfStates findByName(String name);
+
 }

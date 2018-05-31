@@ -12,9 +12,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
 <body>
-    <c:forEach items="${unionOfStates}" var="unionOfState">
+    <c:forEach items="${world.unionOfStates}" var="unionOfState">
         <p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#unionOfState${unionOfState.id}" aria-expanded="false" aria-controls="${unionOfState.id}">
+            <%--<c:set var="buttonClass" value="${world.getAverageTermCount() > unionOfState.getAverageTermCount() ? 'btn-danger' : 'btn-success'}"/>--%>
+            <button class="btn ${world.getAverageTermCount() > unionOfState.getAverageTermCount() ? 'btn-danger' : 'btn-success'}" type="button" data-toggle="collapse" data-target="#unionOfState${unionOfState.id}" aria-expanded="false" aria-controls="${unionOfState.id}">
                     ${unionOfState.name} (${unionOfState.getAverageTermCount()})
             </button>
         </p>
@@ -22,7 +23,7 @@
             <div class="card card-body">
                 <c:forEach items="${unionOfState.countries}" var="country">
                     <p>
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#country${country.id}" aria-expanded="false" aria-controls="${country.id}">
+                        <button class="btn ${unionOfState.getAverageTermCount() > country.getAverageTermCount() ? 'btn-danger' : 'btn-success'}" type="button" data-toggle="collapse" data-target="#country${country.id}" aria-expanded="false" aria-controls="${country.id}">
                                 ${country.name} (${country.getAverageTermCount()})
                         </button>
                     </p>
@@ -30,7 +31,7 @@
                         <div class="card card-body">
                             <c:forEach items="${country.federalStates}" var="federalState">
                                 <p>
-                                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#federalState${federalState.id}" aria-expanded="false" aria-controls="${federalState.id}">
+                                    <button class="btn ${country.getAverageTermCount() > federalState.getAverageTermCount() ? 'btn-danger' : 'btn-success'}" type="button" data-toggle="collapse" data-target="#federalState${federalState.id}" aria-expanded="false" aria-controls="${federalState.id}">
                                             ${federalState.name} (${federalState.getAverageTermCount()})
                                     </button>
                                 </p>
@@ -38,7 +39,7 @@
                                     <div class="card card-body">
                                         <c:forEach items="${federalState.districts}" var="district">
                                             <p>
-                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#district${district.id}" aria-expanded="false" aria-controls="${district.id}">
+                                                <button class="btn ${federalState.getAverageTermCount() > district.getAverageTermCount() ? 'btn-danger' : 'btn-success'}" type="button" data-toggle="collapse" data-target="#district${district.id}" aria-expanded="false" aria-controls="${district.id}">
                                                         ${district.name} (${district.getAverageTermCount()})
                                                 </button>
                                             </p>
@@ -46,7 +47,7 @@
                                                 <div class="card card-body">
                                                     <c:forEach items="${district.cities}" var="city">
                                                         <p>
-                                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#city${city.id}" aria-expanded="false" aria-controls="${city.id}">
+                                                            <button class="btn ${district.getAverageTermCount() > city.getAverageTermCount() ? 'btn-danger' : 'btn-success'}" type="button" data-toggle="collapse" data-target="#city${city.id}" aria-expanded="false" aria-controls="${city.id}">
                                                                     ${city.name} (${city.getAverageTermCount()})
                                                             </button>
                                                         </p>
@@ -54,7 +55,7 @@
                                                             <div class="card card-body">
                                                                 <c:forEach items="${city.schools}" var="school">
                                                                     <p>
-                                                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#school${school.id}" aria-expanded="false" aria-controls="${school.id}">
+                                                                        <button class="btn ${city.getAverageTermCount() > school.getAverageTermCount() ? 'btn-danger' : 'btn-success'}" type="button" data-toggle="collapse" data-target="#school${school.id}" aria-expanded="false" aria-controls="${school.id}">
                                                                                 ${school.name} (${school.getAverageTermCount()})
                                                                         </button>
                                                                     </p>
@@ -62,7 +63,7 @@
                                                                         <div class="card card-body">
                                                                             <c:forEach items="${school.graduations}" var="graduation">
                                                                                 <p>
-                                                                                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#graduation${graduation.id}" aria-expanded="false" aria-controls="${graduation.id}">
+                                                                                    <button class="btn ${school.getAverageTermCount() > graduation.getAverageTermCount() ? 'btn-danger' : 'btn-success'}" type="button" data-toggle="collapse" data-target="#graduation${graduation.id}" aria-expanded="false" aria-controls="${graduation.id}">
                                                                                             ${graduation.name} (${graduation.getAverageTermCount()})
                                                                                     </button>
                                                                                 </p>

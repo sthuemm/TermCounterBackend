@@ -1,10 +1,8 @@
 package de.htwg.smartcity.termcounterbackend.controller;
 
-import de.htwg.smartcity.termcounterbackend.dao.PersonRepository;
-import de.htwg.smartcity.termcounterbackend.dao.UnionOfStatesRepository;
-import de.htwg.smartcity.termcounterbackend.model.PendingWord;
-import de.htwg.smartcity.termcounterbackend.model.Person;
-import de.htwg.smartcity.termcounterbackend.model.UnionOfStates;
+
+import de.htwg.smartcity.termcounterbackend.dao.WorldRepository;
+import de.htwg.smartcity.termcounterbackend.model.World;
 import de.htwg.smartcity.termcounterbackend.service.WordService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Optional;
+import java.util.List;
+
 
 @Controller
 public class WordController {
@@ -22,7 +21,7 @@ public class WordController {
     private WordService wordService;
 
     @Resource
-    private UnionOfStatesRepository unionOfStatesRepository;
+    private WorldRepository worldRepository;
 
     @PostMapping("/")
     public ResponseEntity addWords(@RequestBody String sentence){
@@ -48,9 +47,9 @@ public class WordController {
 
     @GetMapping("")
     public String getPerson(Model model){
-        Iterable<UnionOfStates> unionOfStates = unionOfStatesRepository.findAll();
+        List<World> world = (List<World>) worldRepository.findAll();
 
-        model.addAttribute("unionOfStates", unionOfStates);
+        model.addAttribute("world", world.get(0));
 
         return "index";
     }
@@ -65,7 +64,7 @@ public class WordController {
     @GetMapping("/all")
     public ResponseEntity getEverythingAsJson(){
 
-        return new ResponseEntity(unionOfStatesRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity(worldRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/nonTerm")

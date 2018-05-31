@@ -51,6 +51,9 @@ public class WordServiceImpl implements WordService {
     @Resource
     private UnionOfStatesRepository unionOfStatesRepository;
 
+    @Resource
+    private WorldRepository worldRepository;
+
     @Override
     public void checkSentencesForNewTerms(String sentence, Long personId) {
         Optional<Person> person = personRepository.findById(personId);
@@ -150,8 +153,26 @@ public class WordServiceImpl implements WordService {
         initFederalStates();
         initCountries();
         initUnionOfStates();
+        initWorld();
 
 
+    }
+
+    private void initWorld(){
+        World world = new World();
+        world.getUnionOfStates().add(findUnionOfStates("Europäische Union"));
+        world.getUnionOfStates().add(findUnionOfStates("Organisation Amerikanischer Staaten"));
+
+        worldRepository.save(world);
+    }
+
+    private UnionOfStates findUnionOfStates(String name){
+        UnionOfStates unionOfStates = unionOfStatesRepository.findByName(name);
+        if(unionOfStates == null){
+            log.error("UnionOfStates '"+name+"' could not be found");
+        }
+
+        return unionOfStates;
     }
 
     private void initUnionOfStates(){

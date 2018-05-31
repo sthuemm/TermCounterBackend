@@ -21,6 +21,12 @@ public class World {
     @OneToMany
     private List<UnionOfStates> unionOfStates;
 
+    public double getAverageTermCount(){
+        double terms = unionOfStates.stream().mapToDouble(UnionOfStates::getAverageTermCount).sum();
+        int numberPersons = unionOfStates.size();
+        return terms / numberPersons;
+    }
+
     public World(){
         this.unionOfStates = new ArrayList<>();
     }
