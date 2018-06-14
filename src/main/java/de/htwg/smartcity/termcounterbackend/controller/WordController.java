@@ -2,6 +2,7 @@ package de.htwg.smartcity.termcounterbackend.controller;
 
 
 import de.htwg.smartcity.termcounterbackend.dao.WorldRepository;
+import de.htwg.smartcity.termcounterbackend.model.Sentence;
 import de.htwg.smartcity.termcounterbackend.model.World;
 import de.htwg.smartcity.termcounterbackend.service.WordService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @Slf4j
+@CrossOrigin(origins = "*")
 public class WordController {
 
     @Resource
@@ -40,8 +42,8 @@ public class WordController {
     }
 
     @PostMapping("/person/{personId}")
-    public ResponseEntity addPostWords(@RequestBody String sentence, @PathVariable Long personId){
-        wordService.checkSentencesForNewTerms(sentence, personId);
+    public ResponseEntity addPostWords(@RequestBody Sentence sentence, @PathVariable Long personId){
+        wordService.checkSentencesForNewTerms(sentence.getSentence(), personId);
         log.info("sentence per POST: "+sentence);
         return new ResponseEntity(HttpStatus.OK);
     }
