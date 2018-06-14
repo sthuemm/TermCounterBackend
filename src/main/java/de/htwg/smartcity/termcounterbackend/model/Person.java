@@ -30,13 +30,21 @@ public class Person extends HasAddress {
     @JoinTable(name = "person_term", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "term_id"))
     private List<Term> terms;
 
+    private int numberTerms;
+
     public Person(){
         this.terms = new ArrayList<>();
+        this.numberTerms = terms.size();
     }
 
     public Person(String firstname, String lastname) {
         this.terms = new ArrayList<>();
         this.firstname = firstname;
         this.lastname = lastname;
+        this.numberTerms = terms.size();
+    }
+
+    public int getNumberTerms(){
+        return terms.size();
     }
 }

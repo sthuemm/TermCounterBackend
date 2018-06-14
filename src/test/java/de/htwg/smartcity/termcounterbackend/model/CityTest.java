@@ -18,12 +18,12 @@ public class CityTest {
         city.setId(1L);
         city.setName("Musterstadt");
         city.setPostal(12345);
-        city.getGraduations().add(graduation);
+//        city.getGraduations().add(graduation);
 
         Assert.assertEquals("Id must be 1L", 1L, city.getId());
         Assert.assertEquals("Name must be Musterstadt", "Musterstadt", city.getName());
         Assert.assertEquals("Postal must be 12345", 12345, city.getPostal());
-        Assert.assertEquals("Name of graduation must be Realschule", "Realschule", city.getGraduations().get(0).getName());
+//        Assert.assertEquals("Name of graduation must be Realschule", "Realschule", city.getGraduations().get(0).getName());
 
     }
 }

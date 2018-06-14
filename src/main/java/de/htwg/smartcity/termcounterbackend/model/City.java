@@ -22,10 +22,21 @@ public class City {
     private int postal;
 
     @OneToMany
-    private List<Graduation> graduations;
+    private List<School> schools;
+
+    public double getAverageTermCount(){
+        double terms = schools.stream().mapToDouble(School::getAverageTermCount).sum();
+        int numberPersons = schools.size();
+        return terms / numberPersons;
+    }
 
     public City(){
-        this.graduations = new ArrayList<>();
+        this.schools = new ArrayList<>();
+    }
+
+    public City(String name){
+        this.schools = new ArrayList<>();
+        this.name = name;
     }
 
 

@@ -22,8 +22,19 @@ public class District {
     @OneToMany
     private List<City> cities;
 
+    public double getAverageTermCount(){
+        double terms = cities.stream().mapToDouble(City::getAverageTermCount).sum();
+        int numberPersons = cities.size();
+        return terms / numberPersons;
+    }
+
     public District(){
         this.cities = new ArrayList<>();
+    }
+
+    public District(String name){
+        this.cities = new ArrayList<>();
+        this.name = name;
     }
 
 }

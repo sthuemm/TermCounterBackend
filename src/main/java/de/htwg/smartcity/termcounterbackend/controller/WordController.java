@@ -1,8 +1,8 @@
 package de.htwg.smartcity.termcounterbackend.controller;
 
-import de.htwg.smartcity.termcounterbackend.dao.PersonRepository;
-import de.htwg.smartcity.termcounterbackend.model.PendingWord;
-import de.htwg.smartcity.termcounterbackend.model.Person;
+
+import de.htwg.smartcity.termcounterbackend.dao.WorldRepository;
+import de.htwg.smartcity.termcounterbackend.model.World;
 import de.htwg.smartcity.termcounterbackend.service.WordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Optional;
+import java.util.List;
+
 
 @Controller
 @Slf4j
@@ -22,7 +23,7 @@ public class WordController {
     private WordService wordService;
 
     @Resource
-    private PersonRepository personRepository;
+    private WorldRepository worldRepository;
 
     @PostMapping("/")
     public ResponseEntity addWords(@RequestBody String sentence){
@@ -53,14 +54,11 @@ public class WordController {
         return "pendingWords";
     }
 
-    @GetMapping("/person/{personId}")
-    public String getPerson(Model model, @PathVariable Long personId){
-        Optional<Person> personOptional = personRepository.findById(personId);
-        if(personOptional.isPresent()){
-            Person person = personOptional.get();
-            model.addAttribute("numberTerms", person.getTerms().size());
-        }
+    @GetMapping("")
+    public String getPerson(Model model){
+        List<World> world = (List<World>) worldRepository.findAll();
 
+        model.addAttribute("world", world.get(0));
 
         return "index";
     }
@@ -70,6 +68,12 @@ public class WordController {
         System.out.println("word as term: " +word);
         wordService.declarePendingWordToTerm(word);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity getEverythingAsJson(){
+
+        return new ResponseEntity(worldRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/nonTerm")

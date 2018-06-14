@@ -1,5 +1,6 @@
 package de.htwg.smartcity.termcounterbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,7 @@ public class Term {
     private String word;
 
     @ManyToMany(mappedBy = "terms")
+    @JsonIgnore
     private List<Person> persons;
 
     public Term(){}

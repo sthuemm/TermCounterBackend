@@ -22,8 +22,19 @@ public class Country {
     @OneToMany
     private List<FederalState> federalStates;
 
+    public double getAverageTermCount(){
+        double terms = federalStates.stream().mapToDouble(FederalState::getAverageTermCount).sum();
+        int numberPersons = federalStates.size();
+        return terms / numberPersons;
+    }
+
     public Country(){
         this.federalStates = new ArrayList<>();
+    }
+
+    public Country(String name){
+        this.federalStates = new ArrayList<>();
+        this.name = name;
     }
 
 }
