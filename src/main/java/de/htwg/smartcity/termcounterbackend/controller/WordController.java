@@ -39,7 +39,7 @@ public class WordController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("/person/{personId}/")
+    @PostMapping("/person/{personId}")
     public ResponseEntity addPostWords(@RequestBody String sentence, @PathVariable Long personId){
         wordService.checkSentencesForNewTerms(sentence, personId);
         log.info("sentence per POST: "+sentence);
