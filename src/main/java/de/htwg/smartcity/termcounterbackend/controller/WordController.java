@@ -4,6 +4,7 @@ import de.htwg.smartcity.termcounterbackend.dao.PersonRepository;
 import de.htwg.smartcity.termcounterbackend.model.PendingWord;
 import de.htwg.smartcity.termcounterbackend.model.Person;
 import de.htwg.smartcity.termcounterbackend.service.WordService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.Optional;
 
 @Controller
+@Slf4j
 public class WordController {
 
     @Resource
@@ -33,6 +35,13 @@ public class WordController {
     public ResponseEntity addGetWords(@PathVariable String sentence, @PathVariable Long personId){
         wordService.checkSentencesForNewTerms(sentence, personId);
         System.out.println(sentence);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/person/{personId}/")
+    public ResponseEntity addPostWords(@RequestBody String sentence, @PathVariable Long personId){
+        wordService.checkSentencesForNewTerms(sentence, personId);
+        log.info("sentence per POST: "+sentence);
         return new ResponseEntity(HttpStatus.OK);
     }
 
